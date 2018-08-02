@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PointOfServiceMidterm
 {
-    class Coffee : Drink
+    class Product
     {
     }
 }
