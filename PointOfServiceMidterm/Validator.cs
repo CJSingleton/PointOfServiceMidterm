@@ -10,6 +10,14 @@ namespace PointOfServiceMidterm
     class Validator
     {
 
+        /// <summary>
+        /// Asks user for input then checks if it's null, if it matches the given regular expression, and if the number is within the range of the list. 
+        /// </summary>
+        /// <param name="askUser">Question to ask the user</param>
+        /// <param name="errorMessage">Message to print if the user's input is null or does not match the regular expression</param>
+        /// <param name="rangeErrorMessage">Message to print if user's input is not within the range of the list</param>
+        /// <param name="listCount">How many indexes are in the list</param>
+        /// <returns>Number input by user as an int</returns>
         public static int ListChoiceValidator(string askUser, string errorMessage, string rangeErrorMessage, int listCount)
         {
             Console.WriteLine(askUser);
