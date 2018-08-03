@@ -16,11 +16,11 @@ namespace PointOfServiceMidterm
 
         public string Name { get; set; }
 
-        private string Category { get; set; }
+        public string Category { get; set; }
 
         public string Description { get; set; }
 
-        private double Price { get; set; }
+        public double Price { get; set; }
         
         //Constructors
 

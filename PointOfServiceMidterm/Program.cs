@@ -33,31 +33,50 @@ namespace PointOfServiceMidterm
                 Console.WriteLine("Welcome to C#ffee.Drink();!");
 
                 // asking for order
-
-
-
+                
                 int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
 
-
+                shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
+                shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
                 Console.WriteLine("How many of these would you like to order?");
+                int quant = int.Parse(Console.ReadLine());
+                shoppingCart.Quantity.Add(quant);
 
                 Console.WriteLine("Would you like to order addtional items off the menu, or would you like to pay?");
                 string input = Console.ReadLine().ToLower();
                 bool choice1 = true;
                 do
                 {
-                    if (input == "y" | input == "yes")
+                    Console.WriteLine("Would you like to order addtional items off the menu, or would you like to check out?");
+                    Console.WriteLine("Would you like to pay via:");
+                    Console.WriteLine("(1) Order additional items");
+                    Console.WriteLine("(2) Check out");
+
+                    int input2 = int.Parse(Console.ReadLine());
+
+                    if (input2 == 1)
                     {
                         orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+                        shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
+                        shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
 
+                        Console.WriteLine("How many of these would you like to order?");
+                        int quant2 = int.Parse(Console.ReadLine());
+                        shoppingCart.Quantity.Add(quant2);
+
+                        if (shoppingCart.Names.Contains(menuList[orderchoice - 1].Name))
+                            {
+                            int repeatindex = shoppingCart.Names.IndexOf(menuList[orderchoice - 1].Name);
+                            shoppingCart.Quantity[repeatindex] += quant2;
+                            }
                     }
-                    else if (input == "n" | input == "no")
+                    else if (input2 == 2)
                     {
                         choice1 = false;
                     }
                     else
                     {
-                        Console.WriteLine("That is not a valid choice.");
+                        Console.WriteLine("That is not a valid choice. Please try again.");
                     }
                 } while (choice1 == true);
 
@@ -158,7 +177,6 @@ namespace PointOfServiceMidterm
             
             string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again."); 
         }
-
-
+        
     }
 }
