@@ -65,7 +65,8 @@ namespace PointOfServiceMidterm
                 Console.WriteLine("(1) cash");
                 Console.WriteLine("(2) check");
                 Console.WriteLine("(3) credit card");
-                string payChoice = Console.ReadLine(); // method goes here
+                
+                string payChoice = Validator.PaymentChoiceValidator("Choose 1, 2, or 3", "Please choose a valid number from the list.");// method goes here
 
                 if (payChoice == "1")
                 {
@@ -107,8 +108,6 @@ namespace PointOfServiceMidterm
                 nextLine = reader.ReadLine();
             }
 
-            // Console.WriteLine(fileData);
-
             foreach (string item in stringList)
             {
                 string[] info = item.Split(';');
@@ -126,8 +125,7 @@ namespace PointOfServiceMidterm
         {
             while (true)
             {
-                Console.WriteLine("Please enter cash payment equivalent to the grand total.");
-                string cashNum = Console.ReadLine(); // validation method goes here
+                string cashNum = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again").ToString();
 
                 if (cashNum > grandtotal)
                 {
@@ -148,21 +146,17 @@ namespace PointOfServiceMidterm
 
         public static void CheckPayment()
         {
-            Console.WriteLine("Please enter your check number.");
-            string checkNum = Console.ReadLine(); // validation method goes here
-
+            string checkNum = Validator.CheckNumberValidator("Please enter your check number.", "This is not a valid check number. Please try again.");
         }
 
         public static void CreditCardPayment()
         {
-            Console.WriteLine("Please enter your 16 digit credit card number.");
-            string ccNum = Console.ReadLine(); // validation method goes here 
-
+            string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.","That is not a valid card number. Please try again.");
+           
             Console.WriteLine("Please enter your expiration date (MM/YY).");
             string expNum = Console.ReadLine(); // validation method goes here
-
-            Console.WriteLine("Please enter your 3-4 digit CVV code.");
-            string cvvNum = Console.ReadLine(); // method goes here
+            
+            string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again."); 
         }
 
 
