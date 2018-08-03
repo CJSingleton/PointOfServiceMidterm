@@ -1,1 +1,12 @@
-﻿
+﻿Tomato & Mozzarella Sandwich;Food;Baked tomatoes with melted mozzarella on toasted Halal bread;11.50
+Chicken BLT Sandwich;Food;Grilled chicken with lettuce, tomato, and honey maple bacon on toasted rye bread;12.95
+Reduced-Fat TBE Breakfast Sandwich;Food;Reduced-fat thin sliced smoked turkey, maple bacon, and cage-free egg whites on a flakey croissant;7.50
+Parmesan Spinach Knots;Food;Fresh spinach baked in flakey buttermilk dough, brushed with a mix of butter, Parmesan, garlic powder, oregano and parsley;7.95
+Spiced Apple Pie Cake;Food;Baked with freshly sliced apples and American Buttercream, with hints of cinnamon, nutmeg, and lemon zest;5.80
+Chocolate Chip Loaf;Food;Baked soft with buttermilk, hints of vanilla and chocolate chips;3.50
+Cafe au Lait;Drink;Hot whole milk, ground cinnamon, vanilla bean extract, sugar, unsweetened honey, orange & lemon zest;4.50
+Cortado;Drink;Equal amount of espresso and steamed milk, served in a metal cup;5.80
+Cafe Americano;Drink;Espresso and hot water brewed from the same source;4.00
+Cold Brew;Drink;Coffee grounds steeped in cold water for 24 hours, filtered, and served cold;4.00
+Green Smoothie;Drink;Chopped kale blended with almond milk, frozen banana slices, cinnamon, and hemp, chia, and ground flax seeds;8.50
+Hot Chocolate;Drink;Ground cinnamon, unsweetened cocoa beans, vanilla extract, reduced-fat whipped topping;6.50

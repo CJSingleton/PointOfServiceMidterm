@@ -11,6 +11,12 @@ namespace PointOfServiceMidterm
     {
         static void Main(string[] args)
         {
+            List<Product> menuList = new List<Product>();
+
+            ReadFromText(menuList);
+
+            Console.WriteLine(menuList[0].Name);
+
             //Product prod1 = new Product("1) Tomato & Mozzarella Sandwich", "Food:", "Baked tomatoes with melted mozzarella on toasted Halal bread.", 11.50);
             //Product prod2 = new Product("2) Chicken BLT Sandwich", "Food:", "Grilled chicken with lettuce, tomato, and honey maple bacon on toasted rye bread.", 12.95);
             //Product prod3 = new Product("3) Reduced-Fat TBE Breakfast Sandwich", "Food:", "Reduced-fat thin sliced smoked turkey, maple bacon, and cage-free egg whites on a flakey croissant.", 7.50);
@@ -24,7 +30,85 @@ namespace PointOfServiceMidterm
             //Product prod11 = new Product("11) Green Smoothie", "Drink:", "Chopped kale blended with almond milk, frozen banana slices, cinnamon, and hemp, chia, and ground flax seeds.", 8.50);
             //Product prod12 = new Product("12) Hot Chocolate", "Drink:", "Ground cinnamon, unsweetened cocoa beans, vanilla extract, reduced-fat whipped topping. ", 6.50);
 
+            // Welcoming message
+            Console.WriteLine("Welcome to C#ffee.Drink();!");
+
+            // asking for order
+            Console.WriteLine("Please place your order when you are ready.");
+
+            // if not a valid option
+            Console.WriteLine("That option is not available on our menu. Please select again.");
+
+            // after selecting an item
+            Console.WriteLine("Would you like to order an addtional item off the menu?");
+
+            // after order - do not want additional item **OR** order is done completely
+            Console.WriteLine("Thank you for your order! Your total is (total variable here). Would you like to play with cash, credit card, or check?");
+            // have "cash", "credit card/cc", and "check" in validation methods
+
+            // after order - want additional items
+            Console.WriteLine("Please make your selection when you're ready.");
+
+            // paying with cash
+            Console.WriteLine("You paid (amount here).");
+
+            // paying with cash **CASH/CHANGE BACK**
+            Console.WriteLine("You paid (amount here), your change is (change here).");
+
+            // paying with cash **DOES NOT PASS INT VALIDATION
+            Console.WriteLine("You're short on payment, please pay with the correct amount.");
+
+            // paying with check
+            Console.WriteLine("Your check is written out for (amount here).");
+
+            // paying with check **DOES NOT PASS INT VALIDATION
+            Console.WriteLine("Your check number is invalid, please enter the check number again.");
+
+            // paying with credit card
+            Console.WriteLine("Your card was run for (amount here).");
+
+            // paying with credit card **DOES NOT PASS INT VALIDATION
+            Console.WriteLine("Your credit card number is invalid, please try again.");
+            Console.WriteLine("Your expiration date has already passed, please try again.");
+            Console.WriteLine("Your CVV number is invalid, please try again.");
+
+            //after payment
+            Console.WriteLine("Would you like a receipt?");
+
+
+	         
+        }
+
+        public static void ReadFromText(List<Product> menuList)
+        {
+            StreamReader reader = new StreamReader("../../Products.txt");
+
+            List<string> stringList = new List<string>();
+            string fileData = "";
+            string nextLine = reader.ReadLine(); //reads one line at a time.
+
+            while (nextLine != null)//we did not reach the end of the file.
+            {
+                fileData += nextLine;
+                stringList.Add(nextLine);
+                nextLine = reader.ReadLine();
+            }
+
+            // Console.WriteLine(fileData);
+
+            foreach (string item in stringList)
+            {
+                string[] info = item.Split(';');
+
+                Product temp = new Product(info[0], info[1], info[2], double.Parse(info[3]));
+                menuList.Add(temp);
+            }
+
+            reader.Close();
+
 
         }
+
+
     }
 }
