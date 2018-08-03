@@ -43,5 +43,47 @@ namespace PointOfServiceMidterm
             }
         }
 
+        public static int AddOrPayChoiceValidator(string askUser, string errorMessage, int listCount)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^[12]$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return int.Parse(userInput);
+                }
+            }
+        }
+
+        public static int AddOrPayChoiceValidator(string askUser, string errorMessage, int listCount)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^\d{16}$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return int.Parse(userInput);
+                }
+            }
+        }
+
     }
 }
