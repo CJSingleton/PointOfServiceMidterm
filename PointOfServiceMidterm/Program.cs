@@ -26,42 +26,70 @@ namespace PointOfServiceMidterm
             //ListChoiceValidator(string askUser, string errorMessage, string rangeErrorMessage, int listCount)
 
             // Welcoming message
-            Console.WriteLine("Welcome to C#ffee.Drink();!");
 
-            // asking for order
-
-
-
-            int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
-
-
-            Console.WriteLine("How many of these would you like to order?");
-
-            Console.WriteLine("Would you like to order addtional items off the menu, or would you like to pay?");
-            string input = Console.ReadLine().ToLower();
-            bool choice1 = true;
-            do
+            while (true)
             {
-                if (input == "y" | input == "yes")
+
+                Console.WriteLine("Welcome to C#ffee.Drink();!");
+
+                // asking for order
+
+
+
+                int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+
+
+                Console.WriteLine("How many of these would you like to order?");
+
+                Console.WriteLine("Would you like to order addtional items off the menu, or would you like to pay?");
+                string input = Console.ReadLine().ToLower();
+                bool choice1 = true;
+                do
                 {
-                    orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
-                    
+                    if (input == "y" | input == "yes")
+                    {
+                        orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+
+                    }
+                    else if (input == "n" | input == "no")
+                    {
+                        choice1 = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("That is not a valid choice.");
+                    }
+                } while (choice1 == true);
+
+                Console.WriteLine("Would you like to pay via:");
+                Console.WriteLine("(1) cash");
+                Console.WriteLine("(2) check");
+                Console.WriteLine("(3) credit card");
+                string payChoice = Console.ReadLine(); // method goes here
+
+                if (payChoice == "1")
+                {
+                    CashPayment();
                 }
-                else if (input == "n" | input == "no")
+                else if (payChoice == "2")
                 {
-                    choice1 = false;
+                    CheckPayment();
                 }
                 else
                 {
-                    Console.WriteLine("That is not a valid choice.");
+                    CreditCardPayment();
                 }
-            } while (choice1 == true);
 
 
 
+                // RECEIPT INFO HERE
 
-
-
+                Console.ReadKey();
+                shoppingCart.Names.Clear();
+                shoppingCart.Price.Clear();
+                shoppingCart.Quantity.Clear();
+            }
+            
         }
 
         public static void ReadFromText(List<Product> menuList)
@@ -92,6 +120,49 @@ namespace PointOfServiceMidterm
             reader.Close();
 
 
+        }
+
+        public static void CashPayment()
+        {
+            while (true)
+            {
+                Console.WriteLine("Please enter cash payment equivalent to the grand total.");
+                string cashNum = Console.ReadLine(); // validation method goes here
+
+                if (cashNum > grandtotal)
+                {
+                    Console.WriteLine("Your change is (change here).");
+                    break;
+                }
+                else if (cashNum == grandtotal)
+                {
+                    Console.WriteLine("You paid the total amount of your order.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("You did not pay enough. Please re-enter the amount equal to or greater than the grand total.");
+                }
+            }
+        }
+
+        public static void CheckPayment()
+        {
+            Console.WriteLine("Please enter your check number.");
+            string checkNum = Console.ReadLine(); // validation method goes here
+
+        }
+
+        public static void CreditCardPayment()
+        {
+            Console.WriteLine("Please enter your 16 digit credit card number.");
+            string ccNum = Console.ReadLine(); // validation method goes here 
+
+            Console.WriteLine("Please enter your expiration date (MM/YY).");
+            string expNum = Console.ReadLine(); // validation method goes here
+
+            Console.WriteLine("Please enter your 3-4 digit CVV code.");
+            string cvvNum = Console.ReadLine(); // method goes here
         }
 
 
