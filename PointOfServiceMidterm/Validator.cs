@@ -43,7 +43,7 @@ namespace PointOfServiceMidterm
             }
         }
 
-        public static int AddOrPayChoiceValidator(string askUser, string errorMessage, int listCount)
+        public static string AddOrPayChoiceValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
             while (true)
@@ -59,12 +59,54 @@ namespace PointOfServiceMidterm
                 }
                 else
                 {
+                    return userInput;
+                }
+            }
+        }
+
+        public static string PaymentChoiceValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^[123]$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return userInput;
+                }
+            }
+        }
+
+        public static double CashTenderValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^\d{1,9}$|^\d{1,9}.\d{2}$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
                     return int.Parse(userInput);
                 }
             }
         }
 
-        public static int AddOrPayChoiceValidator(string askUser, string errorMessage, int listCount)
+        public static string CreditCardNumberValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
             while (true)
@@ -80,10 +122,53 @@ namespace PointOfServiceMidterm
                 }
                 else
                 {
-                    return int.Parse(userInput);
+                    return userInput;
                 }
             }
         }
+
+        public static string CreditCardCVVValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^\d{3,4}$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return userInput;
+                }
+            }
+        }
+
+        public static string CheckNumberValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^\d{3,10}$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return userInput;
+                }
+            }
+        }
+
 
     }
 }
