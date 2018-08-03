@@ -12,10 +12,16 @@ namespace PointOfServiceMidterm
         static void Main(string[] args)
         {
             List<Product> menuList = new List<Product>();
-
             ReadFromText(menuList);
 
-            Console.WriteLine(menuList[0].Name);
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.Names.Add("Tomato Sandwich");
+            shoppingCart.Price.Add(9.95);
+            shoppingCart.Quantity.Add(5);
+
+            Console.WriteLine($"{shoppingCart.Quantity[0]} {shoppingCart.Names[0]} will be {shoppingCart.Price[0] * shoppingCart.Quantity[0]}.");
+
+            //Console.WriteLine(menuList[0].Name);
 
             //Product prod1 = new Product("1) Tomato & Mozzarella Sandwich", "Food:", "Baked tomatoes with melted mozzarella on toasted Halal bread.", 11.50);
             //Product prod2 = new Product("2) Chicken BLT Sandwich", "Food:", "Grilled chicken with lettuce, tomato, and honey maple bacon on toasted rye bread.", 12.95);
@@ -30,20 +36,41 @@ namespace PointOfServiceMidterm
             //Product prod11 = new Product("11) Green Smoothie", "Drink:", "Chopped kale blended with almond milk, frozen banana slices, cinnamon, and hemp, chia, and ground flax seeds.", 8.50);
             //Product prod12 = new Product("12) Hot Chocolate", "Drink:", "Ground cinnamon, unsweetened cocoa beans, vanilla extract, reduced-fat whipped topping. ", 6.50);
 
+            //ListChoiceValidator(string askUser, string errorMessage, string rangeErrorMessage, int listCount)
+
             // Welcoming message
             Console.WriteLine("Welcome to C#ffee.Drink();!");
 
             // asking for order
-            Console.WriteLine("Please place your order when you are ready.");
+            Validator.ListChoiceValidator("Please place your order when you are ready", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+            //Console.WriteLine("Please place your order when you are ready.");
 
             // if not a valid option
-            Console.WriteLine("That option is not available on our menu. Please select again.");
+            //Console.WriteLine("That option is not available on our menu. Please select again.");
 
             // after selecting an item
-            Console.WriteLine("Would you like to order an addtional item off the menu?");
+            
+            Console.WriteLine("Would you like to order an addtional item off the menu? (y/n)");
+            string input = Console.ReadLine().ToLower();
+            bool choice1 = true;
+            do
+            {
+                if (input == "y" | input == "yes")
+                {
+                    Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+                }
+                else if (input == "n" | input == "no")
+                {
+                    choice1 = false;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid choice.");
+                }
+            } while (choice1 == true);
 
-            // after order - do not want additional item **OR** order is done completely
-            Console.WriteLine("Thank you for your order! Your total is (total variable here). Would you like to play with cash, credit card, or check?");
+                // after order - do not want additional item **OR** order is done completely
+                Console.WriteLine("Thank you for your order! Your total is (total variable here). Would you like to pay with cash, credit card, or check?");
             // have "cash", "credit card/cc", and "check" in validation methods
 
             // after order - want additional items
