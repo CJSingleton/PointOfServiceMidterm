@@ -148,19 +148,30 @@ namespace PointOfServiceMidterm
             }
         }
 
-        public static string CreditCardExpirationValidator(string askUser, string errorMessage)
+        public static string CreditCardExpirationValidator(string askUser, string errorMessage, string expiredMessage)
         {
             Console.WriteLine(askUser);
             while (true)
             {
                 string userInput = Console.ReadLine();
+
+                string[] dateParts = userInput.Split('/');
+                DateTime expirationDate = DateTime.Parse($"{dateParts[0]}/{"01"}/20{dateParts[1]}");
+                expirationDate = expirationDate.AddMonths(1);
+                expirationDate = expirationDate.AddSeconds(-1);
+
+
                 if (userInput == null)
                 {
                     Console.WriteLine(errorMessage);
                 }
-                else if (!Regex.IsMatch(userInput, @"^$"))
+                else if (!Regex.IsMatch(userInput, @"^([0][1-9]|[1][012])\/(\d\d)$"))
                 {
                     Console.WriteLine(errorMessage);
+                }
+                else if (expirationDate > DateTime.Now)
+                {
+                    Console.WriteLine(expiredMessage);
                 }
                 else
                 {
