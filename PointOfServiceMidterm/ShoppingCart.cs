@@ -9,6 +9,7 @@ namespace PointOfServiceMidterm
     class ShoppingCart
     {
 
+
         public List<string> Names { set; get; }
         public List<double> Price { set; get; }
         public List<int> Quantity { set; get; }

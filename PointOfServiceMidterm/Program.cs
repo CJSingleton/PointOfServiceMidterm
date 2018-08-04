@@ -13,13 +13,14 @@ namespace PointOfServiceMidterm
         {
             List<Product> menuList = new List<Product>();
             ReadFromText(menuList);
+            Receipt receipt = new Receipt();
 
             ShoppingCart shoppingCart = new ShoppingCart();
-            shoppingCart.Names.Add("Tomato Sandwich");
-            shoppingCart.Price.Add(9.95);
-            shoppingCart.Quantity.Add(5);
+            //shoppingCart.Names.Add("Tomato Sandwich");
+            //shoppingCart.Price.Add(9.95);
+            //shoppingCart.Quantity.Add(5);
 
-            Console.WriteLine($"{shoppingCart.Quantity[0]} {shoppingCart.Names[0]} will be {shoppingCart.Price[0] * shoppingCart.Quantity[0]}.");
+            //Console.WriteLine($"{shoppingCart.Quantity[0]} {shoppingCart.Names[0]} will be {shoppingCart.Price[0] * shoppingCart.Quantity[0]}.");
 
             //Console.WriteLine(menuList[0].Name);
 
@@ -32,7 +33,7 @@ namespace PointOfServiceMidterm
 
                 Console.WriteLine("Welcome to C#ffee.Drink();!");
 
-                // asking for order
+                Product.DisplayMenu(menuList);
                 
                 int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
 
@@ -79,6 +80,14 @@ namespace PointOfServiceMidterm
                         Console.WriteLine("That is not a valid choice. Please try again.");
                     }
                 } while (choice1 == true);
+
+                receipt.Subtotal = Receipt.CalcSubTotal(shoppingCart);
+                receipt.Tax = Receipt.CalcSalesTax(receipt.Subtotal);
+                receipt.GrandTotal = Receipt.CalcGrandTotal(receipt.Subtotal, receipt.Tax);
+
+                Console.WriteLine($"Subtotal: {receipt.Subtotal}");
+                Console.WriteLine($"Sales tax: {receipt.Tax}");
+                Console.WriteLine($"Grand total: {receipt.GrandTotal}");
 
                 Console.WriteLine("Would you like to pay via:");
                 Console.WriteLine("(1) cash");
@@ -140,18 +149,18 @@ namespace PointOfServiceMidterm
 
         }
 
-        public static void CashPayment()
+        public static void CashPayment(Receipt receipt)
         {
             while (true)
             {
                 string cashNum = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again").ToString();
 
-                if (cashNum > grandtotal)
+                if (cashNum > receipt.GrandTotal)
                 {
                     Console.WriteLine("Your change is (change here).");
                     break;
                 }
-                else if (cashNum == grandtotal)
+                else if (cashNum == receipt.GrandTotal)
                 {
                     Console.WriteLine("You paid the total amount of your order.");
                     break;
@@ -172,11 +181,14 @@ namespace PointOfServiceMidterm
         {
             string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.","That is not a valid card number. Please try again.");
            
-            Console.WriteLine("Please enter your expiration date (MM/YY).");
-            string expNum = Console.ReadLine(); // validation method goes here
-            
+           
+            string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "Your card has expired. Please try again.");
+
+
             string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again."); 
         }
+
+        
         
     }
 }

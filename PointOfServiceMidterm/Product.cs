@@ -8,12 +8,6 @@ namespace PointOfServiceMidterm
 {
     class Product
     {
-
-        private string name;
-        private string description;
-        private double price;
-        private string category;
-
         public string Name { get; set; }
 
         public string Category { get; set; }
@@ -38,6 +32,14 @@ namespace PointOfServiceMidterm
             Category = cat;
             Description = desc;
             Price = pr;
+        }
+
+        public static void DisplayMenu(List<Product> menu)
+        {
+            for (int i = 0; i < menu.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {menu[i].Name} - {menu[i].Description}. {menu[i].Price}");
+            }
         }
 
 
