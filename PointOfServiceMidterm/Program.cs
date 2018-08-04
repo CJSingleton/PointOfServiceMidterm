@@ -98,7 +98,7 @@ namespace PointOfServiceMidterm
 
                 if (payChoice == "1")
                 {
-                    CashPayment();
+                    CashPayment(receipt);
                 }
                 else if (payChoice == "2")
                 {
@@ -153,7 +153,7 @@ namespace PointOfServiceMidterm
         {
             while (true)
             {
-                string cashNum = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again").ToString();
+                double cashNum = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again");
 
                 if (cashNum > receipt.GrandTotal)
                 {
@@ -182,7 +182,7 @@ namespace PointOfServiceMidterm
             string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.","That is not a valid card number. Please try again.");
            
            
-            string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "Your card has expired. Please try again.");
+            string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "That is not a valid expiration date.", "Your card has expired. Please try again.");
 
 
             string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again."); 
