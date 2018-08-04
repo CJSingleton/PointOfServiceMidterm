@@ -64,6 +64,27 @@ namespace PointOfServiceMidterm
             }
         }
 
+        public static int ChoiceQuantityValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^\d{1,9}$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return int.Parse(userInput);
+                }
+            }
+        }
+
         public static string PaymentChoiceValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -127,6 +148,28 @@ namespace PointOfServiceMidterm
             }
         }
 
+        public static string CreditCardExpirationValidator(string askUser, string errorMessage)
+        {
+            Console.WriteLine(askUser);
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == null)
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else if (!Regex.IsMatch(userInput, @"^$"))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                else
+                {
+                    return userInput;
+                }
+            }
+        }
+
+
         public static string CreditCardCVVValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -169,6 +212,7 @@ namespace PointOfServiceMidterm
             }
         }
 
+        
 
     }
 }
