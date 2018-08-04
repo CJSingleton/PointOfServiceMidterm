@@ -46,6 +46,8 @@ namespace PointOfServiceMidterm
         public static string AddOrPayChoiceValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
+            Console.WriteLine("1: Order additional items");
+            Console.WriteLine("2: Checkout");
             while (true)
             {
                 string userInput = Console.ReadLine();

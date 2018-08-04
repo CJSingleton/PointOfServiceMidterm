@@ -38,7 +38,7 @@ namespace PointOfServiceMidterm
         {
             for (int i = 0; i < menu.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {menu[i].Name} - {menu[i].Description}. {menu[i].Price}");
+                Console.WriteLine("{0,-4}{1,-38}{2,-126}{3,10}", $"{i+1}: ", menu[i].Name, menu[i].Description, $"{menu[i].Price:C}");
             }
         }
 
