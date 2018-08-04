@@ -83,7 +83,8 @@ namespace PointOfServiceMidterm
 
                 if (payChoice == "1")
                 {
-                    CashPayment(receipt);
+                    double cashTender = CashPayment(receipt);
+                    Receipt.PrintCashReceipt(shoppingCart, receipt, cashTender);
                 }
                 else if (payChoice == "2")
                 {
@@ -95,7 +96,7 @@ namespace PointOfServiceMidterm
                 }
 
 
-                Receipt.PrintReceipt(shoppingCart);
+                // Receipt.PrintReceipt(shoppingCart);
                 // RECEIPT INFO HERE
 
                 Console.ReadKey();
@@ -134,21 +135,22 @@ namespace PointOfServiceMidterm
 
         }
 
-        public static void CashPayment(Receipt receipt)
+        public static double CashPayment(Receipt receipt)
         {
             while (true)
             {
                 double cashTender = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again");
-
+                
                 if (cashTender > receipt.GrandTotal)
                 {
+                    receipt.Change = cashTender - receipt.GrandTotal;
                     Console.WriteLine($"Your change is {(cashTender - receipt.GrandTotal):C}.");
-                    break;
+                    return cashTender;
                 }
                 else if ($"{cashTender.ToString():C}" == $"{receipt.GrandTotal.ToString():C}")
                 {
                     Console.WriteLine("You paid the total amount of your order.");
-                    break;
+                    return cashTender;
                 }
                 else
                 {
