@@ -122,7 +122,7 @@ namespace PointOfServiceMidterm
                 }
                 else
                 {
-                    return int.Parse(userInput);
+                    return double.Parse(userInput);
                 }
             }
         }
@@ -179,7 +179,6 @@ namespace PointOfServiceMidterm
                 }
             }
         }
-
 
         public static string CreditCardCVVValidator(string askUser, string errorMessage)
         {

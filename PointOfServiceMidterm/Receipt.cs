@@ -32,24 +32,27 @@ namespace PointOfServiceMidterm
             return subtotal + tax;
         }
 
-        public static double CalcSubTotal(List<ShoppingCart> cart)
+        public static double CalcSubTotal(ShoppingCart cart)
         {
             double subTotal = 0;
-            for (int i = 0; i < cart.Count; i++)
+            for (int i = 0; i < cart.Names.Count; i++)
             {
                 
-                double q = double.Parse(cart[i].Quantity.ToString()) * double.Parse(cart[i].Price.ToString());
+                double q = double.Parse(cart.Quantity[i].ToString()) * cart.Price[i];
                 subTotal += q; 
             }
             return subTotal;
         }
 
-        public static void PrintReceipt(List<ShoppingCart> cart)
+        public static void PrintReceipt(ShoppingCart cart)
         {
-            for (int i = 0; i < cart.Count; i++)
+            for (int i = 0; i < cart.Names.Count; i++)
             {
-                Console.WriteLine($"{cart[i].Names} x {cart[i].Quantity} = {cart[i].Price * cart[i].Quantity}");
+                Console.WriteLine($"{cart.Names[i]} x {cart.Quantity[i]} = {cart.Price[i] * cart.Quantity[i]}");
             }
+
+
+
         }
 
     }
