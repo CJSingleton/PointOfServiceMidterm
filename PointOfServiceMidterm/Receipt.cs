@@ -46,9 +46,11 @@ namespace PointOfServiceMidterm
 
         public static void PrintReceipt(ShoppingCart cart)
         {
+                Console.WriteLine("{0,66", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)
             {
-                Console.WriteLine($"{cart.Names[i]} x {cart.Quantity[i]} = {cart.Price[i] * cart.Quantity[i]}");
+
+                Console.WriteLine("{0,-30}   {1,20} = {2,10}", cart.Names[i], $"x {cart.Quantity[i]}", $"{(cart.Price[i] * cart.Quantity[i]):C}");
             }
 
 

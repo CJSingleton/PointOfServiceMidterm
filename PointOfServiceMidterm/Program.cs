@@ -15,42 +15,42 @@ namespace PointOfServiceMidterm
             ReadFromText(menuList);
             Receipt receipt = new Receipt();
             ShoppingCart shoppingCart = new ShoppingCart();
-            
+
             // Welcoming message
 
             while (true)
             {
                 Console.WriteLine("Welcome to C#ffee.Drink();!");
                 Product.DisplayMenu(menuList);
-                
+
                 int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
                 shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
                 shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
 
-                Console.WriteLine("How many of these would you like to order?");
-                int quant = int.Parse(Console.ReadLine());
+                int quant = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
+
                 shoppingCart.Quantity.Add(quant);
-                
+
                 bool choice1 = true;
                 while (choice1)
                 {
-                    string input = Validator.AddOrPayChoiceValidator("Do you want to order additional items or checkout?","That is not a valid choice. Please try again.");
+                    string input = Validator.AddOrPayChoiceValidator("Do you want to order additional items or checkout?", "That is not a valid choice. Please try again.");
 
                     if (input == "1")
                     {
+                        Product.DisplayMenu(menuList);
                         orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
                         shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
                         shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
 
-                        Console.WriteLine("How many of these would you like to order?");
-                        int quant2 = int.Parse(Console.ReadLine());
+                        int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
                         shoppingCart.Quantity.Add(quant2);
 
                         if (shoppingCart.Names.Contains(menuList[orderchoice - 1].Name))
-                            {
+                        {
                             int repeatindex = shoppingCart.Names.IndexOf(menuList[orderchoice - 1].Name);
                             shoppingCart.Quantity[repeatindex] += quant2;
-                            }
+                        }
                     }
                     else if (input == "2")
                     {
@@ -66,15 +66,19 @@ namespace PointOfServiceMidterm
                 receipt.Tax = Receipt.CalcSalesTax(receipt.Subtotal);
                 receipt.GrandTotal = Receipt.CalcGrandTotal(receipt.Subtotal, receipt.Tax);
 
-                Console.WriteLine($"Subtotal: {receipt.Subtotal}");
-                Console.WriteLine($"Sales tax: {receipt.Tax}");
-                Console.WriteLine($"Grand total: {receipt.GrandTotal}");
+
+                Console.WriteLine("==============================");
+                Console.WriteLine("{0,-15}{1,15}", $"Subtotal: ", $"{receipt.Subtotal:C}");
+                Console.WriteLine("{0,-15}{1,15}", "6% State Tax:", $"{receipt.Tax:C}");
+                Console.WriteLine("------------------------------");
+                Console.WriteLine("{0,-15}{1,15}", "Grand total: ", $"{receipt.GrandTotal:C}");
+                Console.WriteLine("==============================");
 
                 Console.WriteLine("Would you like to pay via:");
                 Console.WriteLine("(1) cash");
                 Console.WriteLine("(2) check");
                 Console.WriteLine("(3) credit card");
-                
+
                 string payChoice = Validator.PaymentChoiceValidator("Choose 1, 2, or 3", "Please choose a valid number from the list.");// method goes here
 
                 if (payChoice == "1")
@@ -91,7 +95,7 @@ namespace PointOfServiceMidterm
                 }
 
 
-
+                Receipt.PrintReceipt(shoppingCart);
                 // RECEIPT INFO HERE
 
                 Console.ReadKey();
@@ -99,7 +103,7 @@ namespace PointOfServiceMidterm
                 shoppingCart.Price.Clear();
                 shoppingCart.Quantity.Clear();
             }
-            
+
         }
 
         public static void ReadFromText(List<Product> menuList)
@@ -134,14 +138,14 @@ namespace PointOfServiceMidterm
         {
             while (true)
             {
-                double cashNum = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again");
+                double cashTender = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again");
 
-                if (cashNum > receipt.GrandTotal)
+                if (cashTender > receipt.GrandTotal)
                 {
-                    Console.WriteLine("Your change is (change here).");
+                    Console.WriteLine($"Your change is {(cashTender - receipt.GrandTotal):C}.");
                     break;
                 }
-                else if (cashNum == receipt.GrandTotal)
+                else if ($"{cashTender.ToString():C}" == $"{receipt.GrandTotal.ToString():C}")
                 {
                     Console.WriteLine("You paid the total amount of your order.");
                     break;
@@ -160,16 +164,16 @@ namespace PointOfServiceMidterm
 
         public static void CreditCardPayment()
         {
-            string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.","That is not a valid card number. Please try again.");
-           
-           
+            string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.", "That is not a valid card number. Please try again.");
+
+
             string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "That is not a valid expiration date.", "Your card has expired. Please try again.");
 
 
-            string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again."); 
+            string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again.");
         }
 
-        
-        
+
+
     }
 }
