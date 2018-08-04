@@ -171,7 +171,7 @@ namespace PointOfServiceMidterm
                 {
                     Console.WriteLine(errorMessage);
                 }
-                else if (expirationDate > DateTime.Now)
+                else if (expirationDate < DateTime.Now)
                 {
                     Console.WriteLine(expiredMessage);
                 }
