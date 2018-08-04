@@ -14,48 +14,29 @@ namespace PointOfServiceMidterm
             List<Product> menuList = new List<Product>();
             ReadFromText(menuList);
             Receipt receipt = new Receipt();
-
             ShoppingCart shoppingCart = new ShoppingCart();
-            //shoppingCart.Names.Add("Tomato Sandwich");
-            //shoppingCart.Price.Add(9.95);
-            //shoppingCart.Quantity.Add(5);
-
-            //Console.WriteLine($"{shoppingCart.Quantity[0]} {shoppingCart.Names[0]} will be {shoppingCart.Price[0] * shoppingCart.Quantity[0]}.");
-
-            //Console.WriteLine(menuList[0].Name);
-
-            //ListChoiceValidator(string askUser, string errorMessage, string rangeErrorMessage, int listCount)
-
+            
             // Welcoming message
 
             while (true)
             {
-
                 Console.WriteLine("Welcome to C#ffee.Drink();!");
-
                 Product.DisplayMenu(menuList);
                 
                 int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
-
                 shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
                 shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
+
                 Console.WriteLine("How many of these would you like to order?");
                 int quant = int.Parse(Console.ReadLine());
                 shoppingCart.Quantity.Add(quant);
-
-                Console.WriteLine("Would you like to order addtional items off the menu, or would you like to pay?");
-                string input = Console.ReadLine().ToLower();
+                
                 bool choice1 = true;
-                do
+                while (choice1)
                 {
-                    Console.WriteLine("Would you like to order addtional items off the menu, or would you like to check out?");
-                    Console.WriteLine("Would you like to pay via:");
-                    Console.WriteLine("(1) Order additional items");
-                    Console.WriteLine("(2) Check out");
+                    string input = Validator.AddOrPayChoiceValidator("Do you want to order additional items or checkout?","That is not a valid choice. Please try again.");
 
-                    int input2 = int.Parse(Console.ReadLine());
-
-                    if (input2 == 1)
+                    if (input == "1")
                     {
                         orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
                         shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
@@ -71,7 +52,7 @@ namespace PointOfServiceMidterm
                             shoppingCart.Quantity[repeatindex] += quant2;
                             }
                     }
-                    else if (input2 == 2)
+                    else if (input == "2")
                     {
                         choice1 = false;
                     }
@@ -79,7 +60,7 @@ namespace PointOfServiceMidterm
                     {
                         Console.WriteLine("That is not a valid choice. Please try again.");
                     }
-                } while (choice1 == true);
+                }
 
                 receipt.Subtotal = Receipt.CalcSubTotal(shoppingCart);
                 receipt.Tax = Receipt.CalcSalesTax(receipt.Subtotal);
