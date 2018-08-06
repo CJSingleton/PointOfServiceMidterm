@@ -211,7 +211,7 @@ namespace PointOfServiceMidterm
                 {
                     Console.WriteLine(errorMessage);
                 }
-                else if (!Regex.IsMatch(userInput, @"^\d{3,10}$"))
+                else if (!Regex.IsMatch(userInput, @"^\d{3,4}$"))
                 {
                     Console.WriteLine(errorMessage);
                 }

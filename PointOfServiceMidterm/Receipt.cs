@@ -65,7 +65,7 @@ namespace PointOfServiceMidterm
 
         }
 
-        public static void PrintCheckReceipt(ShoppingCart cart, Receipt receipt)
+        public static void PrintCheckReceipt(ShoppingCart cart, Receipt receipt, string checkNum)
         {
             Console.WriteLine("{0,66}", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)
@@ -77,16 +77,14 @@ namespace PointOfServiceMidterm
             Console.WriteLine("{0,-15}{1,51}", "6% State Tax:", $"{receipt.Tax:C}");
             Console.WriteLine("------------------------------------------------------------------");
             Console.WriteLine("{0,-15}{1,51}", "Grand total: ", $"{receipt.GrandTotal:C}");
-            Console.WriteLine("{0,-15}{1,51}", "Cash Tendered: ", $"");
+            Console.WriteLine("{0,-15}{1,51}", "Amount paid: ", $"{receipt.GrandTotal:C}");
             Console.WriteLine("==================================================================");
-            Console.WriteLine("{0,-15}{1,51}", "CHANGE: ", $"{receipt.Change:C}");
-
-
-
+            Console.WriteLine("{0,-15}{1,51}", "CHECK NUMBER: ", checkNum);
         }
 
-        public static void PrintCreditReceipt(ShoppingCart cart, Receipt receipt)
+        public static void PrintCreditReceipt(ShoppingCart cart, Receipt receipt, List<string> creditInfo)
         {
+            List<string> cInfo = creditInfo;
             Console.WriteLine("{0,66}", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)
             {
@@ -97,9 +95,12 @@ namespace PointOfServiceMidterm
             Console.WriteLine("{0,-15}{1,51}", "6% State Tax:", $"{receipt.Tax:C}");
             Console.WriteLine("------------------------------------------------------------------");
             Console.WriteLine("{0,-15}{1,51}", "Grand total: ", $"{receipt.GrandTotal:C}");
-            Console.WriteLine("{0,-15}{1,51}", "Cash Tendered: ", $"");
             Console.WriteLine("==================================================================");
-            Console.WriteLine("{0,-15}{1,51}", "CHANGE: ", $"{receipt.Change:C}");
+            string ccString = (creditInfo.ElementAt(0).Length > 16) ? creditInfo.ElementAt(0).Substring(creditInfo.ElementAt(0).Length - 4, 4) : creditInfo.ElementAt(0);
+            Console.WriteLine("{0,-15}{1,51}", "CARD NUMBER:", $"****-****-****-{creditInfo.ElementAt(0).Substring(creditInfo.ElementAt(0).Length - 4, 4)}");
+            Console.WriteLine("{0,-15}{1,51}", "EXPIRATION:", $"{creditInfo.ElementAt(1)}");
+            Console.WriteLine("{0,-15}{1,51}", "APPROVAL CODE:", $"000000");//cosmetic purposes only.
+
 
 
         }

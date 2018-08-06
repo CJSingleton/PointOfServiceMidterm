@@ -88,21 +88,21 @@ namespace PointOfServiceMidterm
                 }
                 else if (payChoice == "2")
                 {
-                    CheckPayment();
+                    string checkNum = CheckPayment();
+                    Receipt.PrintCheckReceipt(shoppingCart, receipt, checkNum);
                 }
                 else
                 {
-                    CreditCardPayment();
+                    List<string> creditInfo = new List<string>();
+                    creditInfo = CreditCardPayment();
+                    Receipt.PrintCreditReceipt(shoppingCart, receipt, creditInfo);
                 }
-
-
-                // Receipt.PrintReceipt(shoppingCart);
-                // RECEIPT INFO HERE
-
+                
                 Console.ReadKey();
                 shoppingCart.Names.Clear();
                 shoppingCart.Price.Clear();
                 shoppingCart.Quantity.Clear();
+                
             }
 
         }
@@ -159,20 +159,25 @@ namespace PointOfServiceMidterm
             }
         }
 
-        public static void CheckPayment()
+        public static string CheckPayment()
         {
             string checkNum = Validator.CheckNumberValidator("Please enter your check number.", "This is not a valid check number. Please try again.");
+            return checkNum;
         }
 
-        public static void CreditCardPayment()
+        public static List<string> CreditCardPayment()
         {
             string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.", "That is not a valid card number. Please try again.");
-
-
             string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "That is not a valid expiration date.", "Your card has expired. Please try again.");
-
-
             string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again.");
+
+            List<string> creditInfo = new List<string>();
+            creditInfo.Add(ccNum);
+            creditInfo.Add(expNum);
+
+            return creditInfo;
+
+
         }
 
 
