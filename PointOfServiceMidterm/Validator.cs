@@ -156,24 +156,26 @@ namespace PointOfServiceMidterm
             while (true)
             {
                 string userInput = Console.ReadLine();
+                
+                if (Regex.IsMatch(userInput, @"^([0][1-9]|[1][012])\/(\d\d)$"))
+                {
+                    string[] dateParts = userInput.Split('/');
+                    DateTime expirationDate = DateTime.Parse($"{dateParts[0]}/{"01"}/20{dateParts[1]}");
+                    expirationDate = expirationDate.AddMonths(1);
+                    expirationDate = expirationDate.AddSeconds(-1);
 
-                string[] dateParts = userInput.Split('/');
-                DateTime expirationDate = DateTime.Parse($"{dateParts[0]}/{"01"}/20{dateParts[1]}");
-                expirationDate = expirationDate.AddMonths(1);
-                expirationDate = expirationDate.AddSeconds(-1);
-
-
-                if (userInput == null)
+                    if (expirationDate < DateTime.Now)
+                    {
+                        Console.WriteLine(expiredMessage);
+                    }
+                }
+                else if (userInput == null)
                 {
                     Console.WriteLine(errorMessage);
                 }
                 else if (!Regex.IsMatch(userInput, @"^([0][1-9]|[1][012])\/(\d\d)$"))
                 {
                     Console.WriteLine(errorMessage);
-                }
-                else if (expirationDate < DateTime.Now)
-                {
-                    Console.WriteLine(expiredMessage);
                 }
                 else
                 {
@@ -224,7 +226,7 @@ namespace PointOfServiceMidterm
             }
         }
 
-        
+
 
     }
 }
