@@ -168,18 +168,14 @@ namespace PointOfServiceMidterm
                     {
                         Console.WriteLine(expiredMessage);
                     }
+                    else
+                    {
+                        return userInput;
+                    }
                 }
                 else if (userInput == null)
                 {
                     Console.WriteLine(errorMessage);
-                }
-                else if (!Regex.IsMatch(userInput, @"^([0][1-9]|[1][012])\/(\d\d)$"))
-                {
-                    Console.WriteLine(errorMessage);
-                }
-                else
-                {
-                    return userInput;
                 }
             }
         }
