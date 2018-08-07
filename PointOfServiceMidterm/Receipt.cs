@@ -32,9 +32,10 @@ namespace PointOfServiceMidterm
             return Math.Round(tax, 2); // rounds the double decimal to the nearest two digit placement.
         }
 
+        // passes through subtotal and tax to be added together
         public static double CalcGrandTotal(double subtotal, double tax)
         {
-            return subtotal + tax; // returns the subtotal and tax
+            return subtotal + tax;
         }
 
         /// <summary>

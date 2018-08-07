@@ -163,10 +163,11 @@ namespace PointOfServiceMidterm
                 }
                 else if ($"{cashTender.ToString():C}" == $"{receipt.GrandTotal.ToString():C}")
                 {
+                    // message printed when paid exact change
                     Console.WriteLine("You paid the total amount of your order.");
                     return cashTender;
                 }
-                else
+                else // less than grand total entered
                 {
                     Console.WriteLine("You did not pay enough. Please re-enter the amount equal to or greater than the grand total.");
                 }
@@ -200,11 +201,6 @@ namespace PointOfServiceMidterm
             creditInfo.Add(expNum);
 
             return creditInfo;
-
-
         }
-
-
-
     }
 }

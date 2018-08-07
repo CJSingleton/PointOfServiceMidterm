@@ -224,7 +224,6 @@ namespace PointOfServiceMidterm
         /// <param name="askUser">string that asks user for their input.</param>
         /// <param name="errorMessage">string that displays invalid input message.</param>
         /// <returns>returns user input for initialization.</returns>
-
         public static string CreditCardCVVValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -272,8 +271,5 @@ namespace PointOfServiceMidterm
                 }
             }
         }
-
-
-
     }
 }
