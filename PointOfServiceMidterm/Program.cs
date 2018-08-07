@@ -30,6 +30,7 @@ namespace PointOfServiceMidterm
                 int quant = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
 
                 shoppingCart.Quantity.Add(quant);
+                Console.WriteLine($"{shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]} {shoppingCart.Names[shoppingCart.Names.Count - 1]} will be {(shoppingCart.Price[shoppingCart.Price.Count - 1] * shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]):C}");
 
                 bool choice1 = true;
                 while (choice1)
@@ -40,17 +41,25 @@ namespace PointOfServiceMidterm
                     {
                         Product.DisplayMenu(menuList);
                         orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
-                        shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
-                        shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
 
-                        int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
-                        shoppingCart.Quantity.Add(quant2);
+
 
                         if (shoppingCart.Names.Contains(menuList[orderchoice - 1].Name))
                         {
+                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
                             int repeatindex = shoppingCart.Names.IndexOf(menuList[orderchoice - 1].Name);
+                            Console.WriteLine($"{quant2} {shoppingCart.Names[repeatindex]} will be {(shoppingCart.Price[repeatindex] * quant2):C}");
                             shoppingCart.Quantity[repeatindex] += quant2;
                         }
+                        else
+                        {
+                            shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
+                            shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
+                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
+                            Console.WriteLine($"{shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]} {shoppingCart.Names[shoppingCart.Names.Count - 1]} will be {(shoppingCart.Price[shoppingCart.Price.Count - 1] * shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]):C}");
+                            shoppingCart.Quantity.Add(quant2);
+                        }
+
                     }
                     else if (input == "2")
                     {
@@ -97,12 +106,12 @@ namespace PointOfServiceMidterm
                     creditInfo = CreditCardPayment();
                     Receipt.PrintCreditReceipt(shoppingCart, receipt, creditInfo);
                 }
-                
+
                 Console.ReadKey();
                 shoppingCart.Names.Clear();
                 shoppingCart.Price.Clear();
                 shoppingCart.Quantity.Clear();
-                
+
             }
 
         }
@@ -140,7 +149,7 @@ namespace PointOfServiceMidterm
             while (true)
             {
                 double cashTender = Validator.CashTenderValidator("Please enter cash payment equivalent to the grand total.", "This is not valid input. Please try again");
-                
+
                 if (cashTender > receipt.GrandTotal)
                 {
                     receipt.Change = cashTender - receipt.GrandTotal;
