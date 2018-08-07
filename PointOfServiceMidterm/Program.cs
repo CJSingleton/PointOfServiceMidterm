@@ -19,6 +19,7 @@ namespace PointOfServiceMidterm
             while (true) // Endless loop to handle any number of transactions
             {
                 Console.WriteLine("Welcome to C#ffee.Drink();!"); // End user salutation
+                Console.WriteLine();
                 Product.DisplayMenu(menuList); // Displays menu from text file with numbered options
 
                 // Stores user choice to reference that index of the menu list
@@ -56,8 +57,8 @@ namespace PointOfServiceMidterm
                             shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
                             shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
                             int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
-                            Console.WriteLine($"{shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]} {shoppingCart.Names[shoppingCart.Names.Count - 1]} will be {(shoppingCart.Price[shoppingCart.Price.Count - 1] * shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]):C}");
                             shoppingCart.Quantity.Add(quant2);
+                            Console.WriteLine($"{shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]} {shoppingCart.Names[shoppingCart.Names.Count - 1]} will be {(shoppingCart.Price[shoppingCart.Price.Count - 1] * shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]):C}");
                         }
 
                     }
