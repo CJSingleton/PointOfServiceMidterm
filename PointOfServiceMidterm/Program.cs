@@ -147,6 +147,7 @@ namespace PointOfServiceMidterm
 
         }
 
+        
         public static double CashPayment(Receipt receipt)
         {
             while (true) // continues while cash amount is not enough to pay for transaction
@@ -172,12 +173,22 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// asks user for check number input, sends it to checknumbervalidator method.
+        /// if not valid, displays invalid input message. saves validated check user input to a string.
+        /// </summary>
+        /// <returns>returns validated input.</returns>
         public static string CheckPayment()
         {
             string checkNum = Validator.CheckNumberValidator("Please enter your check number.", "This is not a valid check number. Please try again.");
             return checkNum;
         }
 
+        /// <summary>
+        /// asks user for credit card number, expiration date number, and cvv number; sends each input to individual validation methods. saves each validated 
+        /// input to a string. adds validated string inputs for ccNum and expNum to a new list.
+        /// </summary>
+        /// <returns>returns list of strings.</returns>
         public static List<string> CreditCardPayment()
         {// adding values to creditInfo list w/ validation for each input
             string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.", "That is not a valid card number. Please try again.");

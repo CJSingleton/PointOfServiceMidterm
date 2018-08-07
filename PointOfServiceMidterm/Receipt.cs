@@ -8,6 +8,8 @@ namespace PointOfServiceMidterm
 {
     class Receipt
     {
+        // Properties
+
         public ShoppingCart Cart { set; get; }
         public double Subtotal   { set; get; }
         public double GrandTotal { set; get; }
@@ -23,17 +25,24 @@ namespace PointOfServiceMidterm
             Change = 0;
         }
 
+        // Passes through subtotal to be multipled with double tax input.
         public static double CalcSalesTax(double subtotal)
         {
             double tax = subtotal * .06; 
-            return Math.Round(tax, 2);
+            return Math.Round(tax, 2); // rounds the double decimal to the nearest two digit placement.
         }
 
         public static double CalcGrandTotal(double subtotal, double tax)
         {
-            return subtotal + tax;
+            return subtotal + tax; // returns the subtotal and tax
         }
 
+        /// <summary>
+        /// takes user choices from shopping cart, calculates line total of each based on quantity and price,
+        /// adds to subtotal variable.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns>returns total calculated subtotal for initialization.</returns>
         public static double CalcSubTotal(ShoppingCart cart)
         {
             double subTotal = 0;
@@ -81,12 +90,7 @@ namespace PointOfServiceMidterm
             Console.WriteLine("==================================================================");
             Console.WriteLine("{0,-15}{1,51}", "CHECK NUMBER: ", checkNum);//prints user's check number as part of receipt 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cart"></param>
-        /// <param name="receipt"></param>
-        /// <param name="creditInfo"></param>
+        
         public static void PrintCreditReceipt(ShoppingCart cart, Receipt receipt, List<string> creditInfo)
         {
             List<string> cInfo = creditInfo;

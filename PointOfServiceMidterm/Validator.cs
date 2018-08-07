@@ -181,12 +181,12 @@ namespace PointOfServiceMidterm
         }
 
         /// <summary>
-        /// Asks for input, checks if input matches regular expression, checks if input is null, coverts input into a DateTime value
+        /// Asks for input, checks if input matches regular expression, checks if input is null, converts input into a DateTime value
         /// checks if day of transaction is before or within input month/year combo
         /// </summary>
-        /// <param name="askUser"></param>
-        /// <param name="errorMessage"></param>
-        /// <param name="expiredMessage"></param>
+        /// <param name="askUser">string that asks user for their input.</param>
+        /// <param name="errorMessage">string that displays invalid input message.</param>
+        /// <param name="expiredMessage">string that displays their input is expired / does not pass the DateTime validation.</param>
         /// <returns>returns user input for initialization</returns>
         public static string CreditCardExpirationValidator(string askUser, string errorMessage, string expiredMessage)
         {
@@ -218,6 +218,13 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if the input is null and matches the regex pattern for 3-4 digit CVV code.
+        /// </summary>
+        /// <param name="askUser">string that asks user for their input.</param>
+        /// <param name="errorMessage">string that displays invalid input message.</param>
+        /// <returns>returns user input for initialization.</returns>
+
         public static string CreditCardCVVValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -239,6 +246,12 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for user input, checks if input is not null and matches the regex pattern for a 3-4 digit check number.
+        /// </summary>
+        /// <param name="askUser">string that asks user for their input.</param>
+        /// <param name="errorMessage">string that displays invalid input message.</param>
+        /// <returns>returns user input for initialization.</returns>
         public static string CheckNumberValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
