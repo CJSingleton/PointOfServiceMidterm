@@ -37,6 +37,7 @@ namespace PointOfServiceMidterm
                 while (choice1) // loop that repeats while user wants to order additional items
                 {
                     string input = Validator.AddOrPayChoiceValidator("Do you want to order additional items or checkout?", "That is not a valid choice. Please try again.");
+                    Console.Clear();
 
                     if (input == "1")
                     {
@@ -45,7 +46,7 @@ namespace PointOfServiceMidterm
                         // re-initializes 'orderchoice' 
 
 
-                        if (shoppingCart.Names.Contains(menuList[orderChoice - 1].Name)) 
+                        if (shoppingCart.Names.Contains(menuList[orderChoice - 1].Name))
                         {// if the new item is already in the user's shoppingCart, the new quantity will be added to the initial value
                             int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderChoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
                             int repeatIndex = shoppingCart.Names.IndexOf(menuList[orderChoice - 1].Name);
@@ -142,11 +143,9 @@ namespace PointOfServiceMidterm
             }
 
             reader.Close();
-
-
         }
 
-        
+
         public static double CashPayment(Receipt receipt)
         {
             while (true) // continues while cash amount is not enough to pay for transaction

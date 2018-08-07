@@ -61,7 +61,7 @@ namespace PointOfServiceMidterm
                 Console.WriteLine("{0,66}", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)//lists name and quantity of line items
             {
-                Console.WriteLine("{0,-30}   {1,20} = {2,10}", cart.Names[i], $"x {cart.Quantity[i]}", $"{(cart.Price[i] * cart.Quantity[i]):C}");
+                Console.WriteLine("{0,-52}x {1,-3}={2,8}", cart.Names[i], cart.Quantity[i], $"{(cart.Price[i] * cart.Quantity[i]):C}");
             }
 
             Console.WriteLine("==================================================================");//basic receipt cost info w/ formatting
@@ -80,7 +80,7 @@ namespace PointOfServiceMidterm
             Console.WriteLine("{0,66}", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)//lists name and quantity of line items
             {
-                Console.WriteLine("{0,-30}   {1,20} = {2,10}", cart.Names[i], $"x {cart.Quantity[i]}", $"{(cart.Price[i] * cart.Quantity[i]):C}");
+                Console.WriteLine("{0,-52}x {1,-3}={2,8}", cart.Names[i], cart.Quantity[i], $"{(cart.Price[i] * cart.Quantity[i]):C}");
             }
             Console.WriteLine("==================================================================");//basic receipt cost info w/ formatting
             Console.WriteLine("{0,-15}{1,51}", $"Subtotal: ", $"{receipt.Subtotal:C}");
@@ -98,7 +98,7 @@ namespace PointOfServiceMidterm
             Console.WriteLine("{0,66}", "---------------------------------------------------------PURCHASES");
             for (int i = 0; i < cart.Names.Count; i++)//lists name and quantity of line items
             {
-                Console.WriteLine("{0,-30}   {1,20} = {2,10}", cart.Names[i], $"x {cart.Quantity[i]}", $"{(cart.Price[i] * cart.Quantity[i]):C}");
+                Console.WriteLine("{0,-52}x {1,-3}={2,8}", cart.Names[i], cart.Quantity[i], $"{(cart.Price[i] * cart.Quantity[i]):C}");
             }
             Console.WriteLine("=================================================================="); // basic receipt cost info w/ formatting
             Console.WriteLine("{0,-15}{1,51}", $"Subtotal: ", $"{receipt.Subtotal:C}");
