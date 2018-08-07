@@ -8,15 +8,13 @@ namespace PointOfServiceMidterm
 {
     class Product
     {
+        // Properties
         public string Name { get; set; }
-
         public string Category { get; set; }
-
         public string Description { get; set; }
-
         public double Price { get; set; }
         
-        //Constructors
+        // Constructors
 
         public Product()// default constructor (no argument constructor)
         {
@@ -36,7 +34,7 @@ namespace PointOfServiceMidterm
 
         public static void DisplayMenu(List<Product> menu)
         {
-            for (int i = 0; i < menu.Count; i++)
+            for (int i = 0; i < menu.Count; i++) // prints entire formatted menu list
             {
                 Console.WriteLine("{0,-4}{1,-38}{2,-126}{3,10}", $"{i+1}: ", menu[i].Name, menu[i].Description, $"{menu[i].Price:C}");
             }

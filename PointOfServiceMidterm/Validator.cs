@@ -43,6 +43,12 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression and checks if input is null
+        /// </summary>
+        /// <param name="askUser">Asks user for input</param>
+        /// <param name="errorMessage">Message that displays if the user enters invalid input</param>
+        /// <returns>User input returns to main to be initialized</returns>
         public static string AddOrPayChoiceValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -65,7 +71,13 @@ namespace PointOfServiceMidterm
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression and checks if input is null
+        /// </summary>
+        /// <param name="askUser">Asks for user input</param>
+        /// <param name="errorMessage">Message that displays if the user enters invalid input</param>
+        /// <returns>user input is parsed to integer and returns to main to be initialized</returns>
         public static int ChoiceQuantityValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -87,6 +99,12 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression and checks if input is null.
+        /// </summary>
+        /// <param name="askUser">Asks for user input</param>
+        /// <param name="errorMessage">Message that displays if the user enters invalid input</param>
+        /// <returns>user input returns to main to be initialized</returns>
         public static string PaymentChoiceValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -108,6 +126,12 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression and checks if input is null
+        /// </summary>
+        /// <param name="askUser">Asks for user input</param>
+        /// <param name="errorMessage">Message that displays if the user enters invalid input</param>
+        /// <returns>user input is parsed to double and returns to main to be initialized</returns>
         public static double CashTenderValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -129,6 +153,12 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression and checks if input is null
+        /// </summary>
+        /// <param name="askUser">Asks for user input</param>
+        /// <param name="errorMessage">Message that displays if the user enters invalid input</param>
+        /// <returns>user input returns to main to be initialized</returns>
         public static string CreditCardNumberValidator(string askUser, string errorMessage)
         {
             Console.WriteLine(askUser);
@@ -150,6 +180,14 @@ namespace PointOfServiceMidterm
             }
         }
 
+        /// <summary>
+        /// Asks for input, checks if input matches regular expression, checks if input is null, coverts input into a DateTime value
+        /// checks if day of transaction is before or within input month/year combo
+        /// </summary>
+        /// <param name="askUser"></param>
+        /// <param name="errorMessage"></param>
+        /// <param name="expiredMessage"></param>
+        /// <returns>returns user input for initialization</returns>
         public static string CreditCardExpirationValidator(string askUser, string errorMessage, string expiredMessage)
         {
             Console.WriteLine(askUser);
