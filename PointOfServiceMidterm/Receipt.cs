@@ -106,11 +106,9 @@ namespace PointOfServiceMidterm
             Console.WriteLine("------------------------------------------------------------------");
             Console.WriteLine("{0,-15}{1,51}", "Grand total: ", $"{receipt.GrandTotal:C}");
             Console.WriteLine("==================================================================");
-            //string ccString = (creditInfo.ElementAt(0).Length > 16) ? creditInfo.ElementAt(0).Substring(creditInfo.ElementAt(0).Length - 4, 4) : creditInfo.ElementAt(0);
             Console.WriteLine("{0,-15}{1,51}", "CARD NUMBER:", $"****-****-****-{creditInfo.ElementAt(0).Substring(creditInfo.ElementAt(0).Length - 4, 4)}");// prints only last four digits of user's credit card for display
             Console.WriteLine("{0,-15}{1,51}", "EXPIRATION:", $"{creditInfo.ElementAt(1)}");
             Console.WriteLine("{0,-15}{1,51}", "APPROVAL CODE:", $"000000");//cosmetic purposes only.
-            
         }
     }
 }

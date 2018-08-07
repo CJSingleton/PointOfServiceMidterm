@@ -23,11 +23,11 @@ namespace PointOfServiceMidterm
                 Product.DisplayMenu(menuList); // Displays menu from text file with numbered options
 
                 // Stores user choice to reference that index of the menu list
-                int orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count); //initializes 'orderchoice' and validates end user selection from menu
-                shoppingCart.Names.Add(menuList[orderchoice - 1].Name); // adds user choice name to shoppingCart
-                shoppingCart.Price.Add(menuList[orderchoice - 1].Price);// adds user choice price to shoppingCart - written sequentially to ensure index number alignment
+                int orderChoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count); //initializes 'orderchoice' and validates end user selection from menu
+                shoppingCart.Names.Add(menuList[orderChoice - 1].Name); // adds user choice name to shoppingCart
+                shoppingCart.Price.Add(menuList[orderChoice - 1].Price);// adds user choice price to shoppingCart - written sequentially to ensure index number alignment
 
-                int quant = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
+                int quant = Validator.ChoiceQuantityValidator($"{menuList[orderChoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
                 shoppingCart.Quantity.Add(quant); // adds quantity user selected to shoppingCart
 
                 // Prints line total for user's item selection multiplied by the price of that product
@@ -41,22 +41,22 @@ namespace PointOfServiceMidterm
                     if (input == "1")
                     {
                         Product.DisplayMenu(menuList); // re-displays entire menu if user chooses to order additional items
-                        orderchoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
+                        orderChoice = Validator.ListChoiceValidator("Please place your order when you are ready (choose a number)", "That option is not available on our menu. Please select again.", "You have selected a number that is not on our menu. Please select again.", menuList.Count);
                         // re-initializes 'orderchoice' 
 
 
-                        if (shoppingCart.Names.Contains(menuList[orderchoice - 1].Name)) 
+                        if (shoppingCart.Names.Contains(menuList[orderChoice - 1].Name)) 
                         {// if the new item is already in the user's shoppingCart, the new quantity will be added to the initial value
-                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
-                            int repeatindex = shoppingCart.Names.IndexOf(menuList[orderchoice - 1].Name);
-                            Console.WriteLine($"{quant2} {shoppingCart.Names[repeatindex]} will be {(shoppingCart.Price[repeatindex] * quant2):C}");
-                            shoppingCart.Quantity[repeatindex] += quant2;
+                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderChoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
+                            int repeatIndex = shoppingCart.Names.IndexOf(menuList[orderChoice - 1].Name);
+                            shoppingCart.Quantity[repeatIndex] += quant2;
+                            Console.WriteLine($"{quant2} {shoppingCart.Names[repeatIndex]} will be {(shoppingCart.Price[repeatIndex] * quant2):C}");
                         }
                         else
                         {// new item name, price, and quantity are added to shoppingCart
-                            shoppingCart.Names.Add(menuList[orderchoice - 1].Name);
-                            shoppingCart.Price.Add(menuList[orderchoice - 1].Price);
-                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderchoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
+                            shoppingCart.Names.Add(menuList[orderChoice - 1].Name);
+                            shoppingCart.Price.Add(menuList[orderChoice - 1].Price);
+                            int quant2 = Validator.ChoiceQuantityValidator($"{menuList[orderChoice - 1].Name}: How many would you like?", "That was not a valid quantity, please enter a number.");
                             shoppingCart.Quantity.Add(quant2);
                             Console.WriteLine($"{shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]} {shoppingCart.Names[shoppingCart.Names.Count - 1]} will be {(shoppingCart.Price[shoppingCart.Price.Count - 1] * shoppingCart.Quantity[shoppingCart.Quantity.Count - 1]):C}");
                         }
@@ -109,7 +109,7 @@ namespace PointOfServiceMidterm
                     Receipt.PrintCreditReceipt(shoppingCart, receipt, creditInfo); // prints receipt info and includes "masked" credit info
                 }
 
-                Console.ReadKey();
+                Console.ReadKey(); // Waits with reciept printed until a key is pressed before clearing the screen
 
                 // clears shopping cart and console text before loop restarts for new transaction
                 shoppingCart.Names.Clear();
@@ -125,12 +125,10 @@ namespace PointOfServiceMidterm
             StreamReader reader = new StreamReader("../../Products.txt");
 
             List<string> stringList = new List<string>();
-            string fileData = "";
             string nextLine = reader.ReadLine(); //reads one line at a time.
 
             while (nextLine != null) // continues while not at end of file
             {
-                fileData += nextLine;
                 stringList.Add(nextLine);
                 nextLine = reader.ReadLine();
             }
@@ -193,7 +191,7 @@ namespace PointOfServiceMidterm
         /// <returns>returns list of strings.</returns>
         public static List<string> CreditCardPayment()
         {// adding values to creditInfo list w/ validation for each input
-            string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.", "That is not a valid card number. Please try again.");
+            string ccNum = Validator.CreditCardNumberValidator("Please enter your 16 digit credit card number.", "That is not a valid card number. Please enter the credit card number without any special characters.");
             string expNum = Validator.CreditCardExpirationValidator("Please enter your expiration date (MM/YY).", "That is not a valid expiration date.", "Your card has expired. Please try again.");
             string cvvNum = Validator.CreditCardCVVValidator("Please enter your 3-4 digit CVV Code.", "That is not a valid CVV code. Please try again.");
 
